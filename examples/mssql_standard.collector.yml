@@ -10,12 +10,5 @@ metrics:
 queries:
   - query_name: PctSkipRate
     query: |
-      WITH　uqDeviceIdSkip
-      AS
-      (SELECT COUNT(DISTINCT deviceId) as NumA FROM ads.v5_action_events WHERE action = 'appskip'
-      HAVING dateTime < NOW() - INTERVAL 1 HOUR),
-      uqDeviceId　
-      AS
-      (SELECT COUNT(DISTINCT deviceId) as NumB FROM ads.v5_action_events HAVING dateTime < NOW() - INTERVAL 1 HOUR)　
       SELECT uqDeviceIdSkip.NumA/uqDeviceId.NumB * 100 as PctSkipRate
-      FROM uqDeviceIdSkip, uqDeviceId
+      FROM test_table
