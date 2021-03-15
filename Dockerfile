@@ -5,6 +5,8 @@ ADD .   /go/src/github.com/sql_exporter
 WORKDIR /go/src/github.com/sql_exporter
 
 # Do makefile
+RUN go mod vendor &&\
+    mv cmd/sql_exporter/conn_go18.go vendor/github.com/mailru/go-clickhouse/conn_go18.go
 RUN make
 
 # Make image and copy build sql_exporter
