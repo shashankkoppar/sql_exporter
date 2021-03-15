@@ -18,9 +18,9 @@ require (
 	github.com/prometheus/procfs v0.6.0 // indirect
 	github.com/prometheus/promu v0.8.1 // indirect
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9 // indirect
-	golang.org/x/net v0.0.0-20210226172049-e18ecbb05110 // indirect
+	golang.org/x/net v0.0.0-20210315170653-34ac3e1c2000 // indirect
 	golang.org/x/oauth2 v0.0.0-20210313182246-cd4f82c27b84 // indirect
-	golang.org/x/sys v0.0.0-20210314195730-07df6a141424 // indirect
+	golang.org/x/sys v0.0.0-20210315160823-c6e025ad8005 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	gopkg.in/yaml.v2 v2.4.0
 )
