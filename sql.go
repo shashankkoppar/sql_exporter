@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"strings"
 
-	_ "github.com/ClickHouse/clickhouse-go" // register the ClickHouse driver
-	_ "github.com/denisenkom/go-mssqldb"    // register the MS-SQL driver
-	_ "github.com/go-sql-driver/mysql"      // register the MySQL driver
+	_ "github.com/denisenkom/go-mssqldb" // register the MS-SQL driver
+	_ "github.com/go-sql-driver/mysql"   // register the MySQL driver
 	log "github.com/golang/glog"
-	_ "github.com/lib/pq" // register the PostgreSQL driver
+	_ "github.com/lib/pq"               // register the PostgreSQL driver
+	_ "github.com/mailru/go-clickhouse" // register the ClickHouse driver
 )
 
 // OpenConnection extracts the driver name from the DSN (expected as the URI scheme), adjusts it where necessary (e.g.
@@ -56,7 +56,7 @@ func OpenConnection(ctx context.Context, logContext, dsn string, maxConns, maxId
 	case "mysql":
 		dsn = strings.TrimPrefix(dsn, "mysql://")
 	case "clickhouse":
-		dsn = "tcp://" + strings.TrimPrefix(dsn, "clickhouse://")
+		dsn = "http://" + strings.TrimPrefix(dsn, "clickhouse://")
 	}
 
 	// Open the DB handle in a separate goroutine so we can terminate early if the context closes.
