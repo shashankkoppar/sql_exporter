@@ -1,13 +1,14 @@
-FROM quay.io/prometheus/golang-builder AS builder
+FROM golang:alpine AS builder
 
 # Get sql_exporter
 ADD .   /go/src/github.com/sql_exporter
 WORKDIR /go/src/github.com/sql_exporter
 
 # Do makefile
-RUN go mod vendor &&\
-    mv cmd/sql_exporter/conn_go18.go vendor/github.com/mailru/go-clickhouse/conn_go18.go
-RUN make
+RUN apk add git make &&\
+    go mod vendor &&\
+    mv clickhouse/conn_go18.go vendor/github.com/mailru/go-clickhouse/conn_go18.go
+RUN make build
 
 # Make image and copy build sql_exporter
 FROM        quay.io/prometheus/busybox:glibc

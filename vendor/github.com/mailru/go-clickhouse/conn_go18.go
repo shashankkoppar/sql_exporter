@@ -6,6 +6,8 @@ import (
 	"context"
 	"database/sql/driver"
 	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
 )
 
@@ -14,11 +16,9 @@ func (c *conn) Ping(ctx context.Context) error {
 	if c.transport == nil {
 		return ErrTransportNil
 	}
-
-	req, err := c.buildRequest(ctx, "select 1", nil, true)
 	// make request with empty body, response must be "Ok.\n"
-//	u := &url.URL{Scheme: c.url.Scheme, User: c.url.User, Host: c.url.Host, Path: "/"}
-//	req, err := http.NewRequest(http.MethodGet, u.String(), nil)
+	u := &url.URL{Scheme: c.url.Scheme, User: c.url.User, Host: c.url.Host, Path: "/ping"}
+	req, err := http.NewRequest(http.MethodGet, u.String(), nil)
 	if err != nil {
 		return err
 	}
@@ -35,7 +35,7 @@ func (c *conn) Ping(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	if err != nil || !strings.HasPrefix(string(resp), "1") {
+	if len(resp) != 4 || !strings.HasPrefix(string(resp), "Ok.") {
 		return ErrIncorrectResponse
 	}
 	return nil

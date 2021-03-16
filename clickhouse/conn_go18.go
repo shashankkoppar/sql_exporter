@@ -17,8 +17,8 @@ func (c *conn) Ping(ctx context.Context) error {
 
 	req, err := c.buildRequest(ctx, "select 1", nil, true)
 	// make request with empty body, response must be "Ok.\n"
-//	u := &url.URL{Scheme: c.url.Scheme, User: c.url.User, Host: c.url.Host, Path: "/"}
-//	req, err := http.NewRequest(http.MethodGet, u.String(), nil)
+	//	u := &url.URL{Scheme: c.url.Scheme, User: c.url.User, Host: c.url.Host, Path: "/"}
+	//	req, err := http.NewRequest(http.MethodGet, u.String(), nil)
 	if err != nil {
 		return err
 	}
