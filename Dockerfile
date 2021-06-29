@@ -1,7 +1,7 @@
 FROM golang:1.16-alpine AS builder
 
 # Get sql_exporter
-ADD .   /go/src/github.com/sql_exporter
+COPY .   /go/src/github.com/sql_exporter
 WORKDIR /go/src/github.com/sql_exporter
 
 # Do makefile
