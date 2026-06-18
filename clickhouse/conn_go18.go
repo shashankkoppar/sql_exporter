@@ -1,4 +1,4 @@
-// +build go1.8
+//go:build ignore
 
 package clickhouse
 

@@ -40,11 +40,11 @@ vet:
 	@echo ">> vetting code"
 	@$(GO) vet $(pkgs)
 
-build: promu
+build: $(PROMU)
 	@echo ">> building binaries"
 	@$(PROMU) build --prefix $(PREFIX)
 
-tarball: promu
+tarball: $(PROMU)
 	@echo ">> building release tarball"
 	@$(PROMU) tarball --prefix $(PREFIX) $(BIN_DIR)
 
@@ -52,10 +52,10 @@ docker:
 	@echo ">> building docker image"
 	@docker build -t "$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG)" .
 
-promu:
+$(PROMU):
 	@GOOS=$(shell uname -s | tr A-Z a-z) \
-		GOARCH=$(subst x86_64,amd64,$(patsubst i%86,386,$(shell uname -m))) \
-		$(GO) get -u github.com/prometheus/promu
+		GOARCH=$(subst x86_64,amd64,$(subst aarch64,arm64,$(patsubst i%86,386,$(shell uname -m)))) \
+		$(GO) install github.com/prometheus/promu@latest
 
 
-.PHONY: all style format build test vet tarball docker promu
+.PHONY: all style format build test vet tarball docker
