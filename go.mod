@@ -1,9 +1,9 @@
-go 1.26
+go 1.26.10
 
 require (
 	github.com/denisenkom/go-mssqldb v0.0.0-20191001013358-cfbb681360f0
 	github.com/go-sql-driver/mysql v1.4.1-0.20191114115753-b4242bab7dc5
-	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
+	github.com/golang/glog v1.2.5
 	github.com/golang/protobuf v1.5.2
 	github.com/lib/pq v1.2.1-0.20191011153232-f91d3411e481
 	github.com/mailru/go-clickhouse v1.4.0

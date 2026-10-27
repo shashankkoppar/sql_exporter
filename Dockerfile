@@ -1,4 +1,4 @@
-FROM golang:1.26-alpine AS builder
+FROM golang:1.26.10-alpine AS builder
 
 # Get sql_exporter
 COPY .   /go/src/github.com/sql_exporter
